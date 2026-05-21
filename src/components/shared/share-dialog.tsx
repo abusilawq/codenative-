@@ -65,7 +65,7 @@ export function ShareDialog({ open, onOpenChange, title, analogy, takeaway, lang
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-xl">
+      <DialogContent className="max-w-[min(560px,calc(100vw-2rem))] max-h-[90vh] overflow-y-auto p-5 sm:p-6">
         <DialogHeader>
           <DialogTitle>Share this story</DialogTitle>
           <DialogDescription>
@@ -73,15 +73,15 @@ export function ShareDialog({ open, onOpenChange, title, analogy, takeaway, lang
           </DialogDescription>
         </DialogHeader>
 
-        {/* OG preview */}
-        <div className="rounded-xl overflow-hidden border border-white/10 bg-navy-950">
+        {/* OG preview — strict aspect ratio, never overflows */}
+        <div className="rounded-xl overflow-hidden border border-white/10 bg-navy-950 w-full aspect-[1200/630]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={ogPreview} alt="Share preview" className="w-full h-auto" />
+          <img src={ogPreview} alt="Share preview" className="w-full h-full object-cover block" />
         </div>
 
         {/* URL row */}
-        <div className="flex items-center gap-2 p-3 rounded-xl bg-white/5 border border-white/10">
-          <code className="flex-1 text-xs font-mono text-white/70 truncate">{shareUrl}</code>
+        <div className="flex items-center gap-2 p-3 rounded-xl bg-white/5 border border-white/10 min-w-0">
+          <code className="flex-1 min-w-0 text-xs font-mono text-white/70 truncate">{shareUrl}</code>
           <Button size="sm" variant={copied ? "secondary" : "default"} onClick={copyLink} className="shrink-0">
             <AnimatePresence mode="wait">
               {copied ? (

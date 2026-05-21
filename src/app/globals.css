@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 60% 10%;
+    --foreground: 0 0% 98%;
+    --card: 230 55% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 230 55% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 43 100% 48%;
+    --primary-foreground: 230 60% 10%;
+    --secondary: 230 40% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 230 30% 18%;
+    --muted-foreground: 230 20% 70%;
+    --accent: 230 40% 20%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 230 30% 20%;
+    --input: 230 30% 18%;
+    --ring: 43 100% 48%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-navy-900 text-foreground font-sans antialiased;
+    background-image:
+      radial-gradient(at 15% 10%, hsla(43, 100%, 48%, 0.08) 0px, transparent 50%),
+      radial-gradient(at 85% 90%, hsla(230, 80%, 30%, 0.25) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    @apply bg-gold-500/30 text-gold-100;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-navy-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-navy-500;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.06];
+  }
+  .glass-strong {
+    @apply bg-white/[0.06] backdrop-blur-2xl border border-white/[0.1];
+  }
+  .glow-gold {
+    box-shadow: 0 0 60px -15px rgba(245, 183, 0, 0.5);
+  }
+  .text-gradient-gold {
+    @apply bg-gradient-to-br from-gold-300 via-gold-500 to-gold-600 bg-clip-text text-transparent;
+  }
+  .text-gradient-white {
+    @apply bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent;
+  }
+  .grid-bg {
+    background-image: var(--tw-gradient-from, linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px)),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .rtl {
+    direction: rtl;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}
+
+/* Floating ambient orbs — subtle motion behind hero/glass surfaces */
+@keyframes orb-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 30px) scale(0.95);
+  }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: orb-drift 20s ease-in-out infinite;
+  pointer-events: none;
+}
